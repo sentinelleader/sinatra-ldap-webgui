@@ -1,0 +1,16 @@
+%form{ :action => "/change", :method => "post"}
+  %table
+    %tr
+      %td.label
+        %label{:for => "status"} Status:
+      %td
+        %input{:type => "checkbox",  :id => "status", :name => "status", :value => "occupied"}
+    %tr
+      %td.label
+        %label{:for => "message"} Message:
+      %td
+        %textarea{:name => "message"}
+    %tr
+      %td
+      %td
+        %input.submit{:type => "submit", :value => "Continue", :class => "button"}

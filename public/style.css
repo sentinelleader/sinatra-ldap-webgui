@@ -1,0 +1,125 @@
+/*  | # COPYRIGHT HEADER START # 
+ * |   PasswdLDAP is a Sinatra App that allows users to change their OpenLDAP Password
+ * |   Copyright (C) 2012 Puzzle ITC GmbH www.puzzle.ch
+ * |   
+ * |   This program is free software: you can redistribute it and/or modify
+ * |   it under the terms of the GNU Affero General Public License as
+ * |   published by the Free Software Foundation, either version 3 of the
+ * |   License, or (at your option) any later version.
+ * |   
+ * |   This program is distributed in the hope that it will be useful,
+ * |   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * |   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * |   GNU Affero General Public License for more details.
+ * |   
+ * |   You should have received a copy of the GNU Affero General Public License
+ * |   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * | # COPYRIGHT HEADER END # 
+ */  
+
+td label{
+	font-size:14px;
+	font-weight:bold;
+	color:#666;
+	font-family: arail,helvetica,san-serif;
+}
+input{
+	height:28px;
+	width:200px;
+	border:1px solid #ccc;
+	font-size:16px;
+	font-weight: bold;
+	color:#666;
+	padding:7px 0 0 4px;
+}
+
+/*  ADVANCED STYLES */
+.top_testresult{
+	font-weight: bold;
+	font-size:13px;
+	font-family: arail,helvetica,san-serif;
+	color:#666;
+	padding:0;
+	margin:0 0 2px 0;
+}
+.top_testresult span{
+	padding:6px ;
+	margin:0;
+}
+.top_shortPass{
+	background:#edabab;
+	border:1px solid #bc0000;
+	display:block;
+}
+.top_shortPass span{
+	
+}
+.top_badPass{
+	background:#edabab;
+	border:1px solid #bc0000;
+	display:block;
+}
+.top_badPass span{
+	
+}
+.top_goodPass{
+	background:#ede3ab;
+	border:1px solid #bc9f00;
+	display:block;
+}
+.top_goodPass span{
+
+}
+.top_strongPass{
+	background:#d3edab;
+	border:1px solid #73bc00;
+	display:block;
+}
+.top_strongPass span{
+
+}
+
+
+/* 	RESULT STYLE  */
+.testresult{
+	font-weight: bold;
+	font-size:13px;
+	font-family: arial,helvetica,san-serif;
+	color:#666;
+	padding:0px 0px 12px 10px;
+	margin-left:10px;
+	display: block;
+	height:28px;
+	float:left;
+}
+.testresult span{
+	padding:10px 20px 12px 10px;
+	margin: 0px 0px 0px 20px;
+	display:block;
+	float:right;
+	white-space: nowrap;
+}
+.shortPass{
+	background:url(images/red.png) no-repeat 0 0;
+}
+.shortPass span{
+	background:url(images/red.png) no-repeat top right;
+}
+.badPass{
+	background:url(images/red.png) no-repeat 0 0;
+}
+.badPass span{
+	background:url(images/red.png) no-repeat top right;
+}
+.goodPass{
+	background:url(images/yellow.png) no-repeat 0 0;
+}
+.goodPass span{
+	background:url(images/yellow.png) no-repeat top right;
+}
+.strongPass{
+	background:url(images/green.png) no-repeat 0 0;
+}
+.strongPass span{
+	background:url(images/green.png) no-repeat top right;
+}

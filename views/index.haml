@@ -1,0 +1,18 @@
+%p.info Enter your current credentials:
+.form
+  %form{ :action => "/", :method => "post"}
+    %table
+      %tr
+        %td.label
+          %label{:for => "username"} Username:
+        %td
+          %input{:type => "text", :name => "username", :class => "text", :value => @username }
+      %tr
+        %td.label
+          %label{:for => "password"} Password:
+        %td
+          %input{:type => "password", :name => "password", :class => "password"}
+      %tr
+        %td
+        %td
+          %input.submit{:type => "submit", :value => "Continue", :class => "button"}
