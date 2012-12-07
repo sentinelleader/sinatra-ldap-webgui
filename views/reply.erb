@@ -17,7 +17,7 @@
             </a>
 
             <ul class="nav">
-              <li><a href="/reply">Auto-Reply</a></li>
+              <li><a href="/change">Auto-Reply</a></li>
 	      <li><a href="/passwd">Change Password</a></li>
 	      <li><a href="/logout">Logout</a></li>
      	     </ul>
@@ -25,7 +25,13 @@
         </div>
       </div>
     </div>
-
+<form method="post" action="/reply">
+	<input type="checkbox" style="margin: 50px 50px" value="checked">Enable Auto-Reply	
+<textarea name="comments" cols="25" rows="5" style="margin: 100px -110px 11px;">
+Enter your message here...
+</textarea><br>
+<input type="submit" style="margin: 10px 60px 11px" value="Submit" />
+</form>
 
   </body>
 </html>

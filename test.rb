@@ -16,7 +16,11 @@ helpers do
 end
 
 get '/' do
-  erb "Please Login to Continue"
+if session[:username]
+	redirect '/options'
+else
+   erb "Please Login to Continue"
+end
 end
 get '/login' do
   username        = params[:username]
@@ -41,8 +45,18 @@ session[:password] = @password = params[:password]
      redirect '/'
   end
 end
+get '/passwd' do
+	erb :passwd
+end
+get '/reply' do
+	erb :reply
+end
 get '/options' do
+  if session[:username]
 	erb :options
+  else
+	  redirect '/'
+end
 end
 get '/logout' do
 	  session.delete(:username)
