@@ -49,6 +49,7 @@ get '/passwd' do
 	erb :passwd
 end
 get '/reply' do
+message        = params[:message]
 	erb :reply
 end
 get '/options' do
@@ -71,7 +72,7 @@ puts "----- after redirection #{session[:username]}"
 #redirect '/' 
 # end
 end
-post '/change' do
+post '/reply' do
   if session[:username]
 treebase = "dc=hsit, dc=ac, dc=in"
   session[:message] = @message = params[:message]
@@ -83,10 +84,11 @@ dn = "uid=#{session[:username]},ou=people,#{treebase}"
   ops = [
 #  [:add, :deliveryMode, "noforward"],
   [:replace, :deliveryMode, "reply"],
-   [:add, :mailReplyText, "my auto reply"],
+   [:add, :mailReplyText, "#{@message}"],
 ]
-  puts "#{@message}"
+  puts " from post -- #{session[:message]}"
   ldap.modify :dn => dn, :operations => ops
+  erb "<div class='alert alert-message'>Auto Reply Added Successfully</div>"
 else
   puts "reconnecting to ldap"
   puts "user --- #{@user}"
