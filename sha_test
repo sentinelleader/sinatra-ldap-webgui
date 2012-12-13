@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+# Ruby script to generate SSHA (Good for LDAP)
+require 'sha1'
+require 'base64'
+secret, secret2 = String.new
+
+def getspass
+  begin
+    old_settings = `stty -g`
+    system 'stty -echo'
+    pass = gets.chomp
+  ensure
+    system "stty #{old_settings}"
+  end
+  pass
+end
+ 
+$stderr.print "Enter password: "
+secret = getspass
+$stderr.puts
+$stderr.print "Again: "
+secret2 = getspass
+$stderr.puts
+
+raise "Error: password mismatch." unless secret == secret2
+
+salt = [Array.new(6){rand(256).chr}.join].pack("m")[0..7];
+hash = "{SSHA}"+Base64.encode64(Digest::SHA1.digest(secret+salt)+salt ).chomp!
+#h = Digest::SHA1.digest << 'secret'
+#h = Digest::SHA1.digest('secret',salt)
+puts hash
+#@h2 = Base64.encode64(h)
+#puts "'userPassword: '   hash"
