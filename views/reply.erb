@@ -18,7 +18,7 @@
       <div class="navbar-inner">
         <div class="container">
 
-            <a class="brand" href="#">
+            <a class="brand" href="/">
               User CPanel
             </a>
 	<ul class="nav nav-pills">
@@ -29,7 +29,7 @@
           </a>
          <ul class="dropdown-menu">
            <li><a href="/reply">Enable</a></li>
-           <li><a href="/disbale">Disable</a></li>
+           <li><a href="/disable">Disable</a></li>
          </ul>
          </li>
         </ul>
@@ -41,8 +41,9 @@
         </div>
       </div>
     </div>
-<form method="post" action="/reply">
-	<input type="checkbox" style="margin: 50px 50px" value="checked">Enable Auto-Reply	
+    <form method="post" action="/reply">
+	<input type="hidden" name="checkbox" style="margin: 50px 50px" value="false">  
+	<input type="checkbox" name="checkbox" style="margin: 50px 50px" value="true">Enable Auto-Reply	
 <textarea name="message" cols="25" rows="5" style="margin: 100px -110px 11px;">
 Enter your message here...
 </textarea><br>

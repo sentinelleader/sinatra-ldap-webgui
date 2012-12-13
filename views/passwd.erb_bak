@@ -1,5 +1,16 @@
 <script type="text/javascript" src="/lib/bootstrap/js/jquery.complexify.js"></script>
-<script src="/lib/bootstrap/js/script.js"></script>  
+<script type="text/javascript">
+					$(function () {
+						$("#password").complexify({}, function (valid, complexity) {
+							if (!valid) {
+								$('#progress').css({'width':complexity + '%'}).removeClass('progressbarValid').addClass('progressbarInvalid');
+							} else {
+								$('#progress').css({'width':complexity + '%'}).removeClass('progressbarInvalid').addClass('progressbarValid');
+							}
+							$('#complexity').html(Math.round(complexity) + '%');
+						});
+					});
+				</script>
 <link href="../static/lib/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
 
@@ -57,7 +68,12 @@
 <form action='/passwd' method='post' class="container-fluid">
   <input name='newpassword' input type="password" id="password" placeholder="newpassword" autofocus>
   <input name='cnewpassword' input type="password" placeholder="confirmnewpassword" >
-   <span id="result">complexity</span>
   <input class="btn" type='submit' value='submit' >
 </form>
+<div id="progressbar"><div id="progress"></div></div>
+					<div id="status">
+						<div id="complexity">0%</div>
+						<div id="complexityLabel">Complexity</div>
+					</div>
+				</div>
 </div>

@@ -76,6 +76,7 @@ post '/passwd' do
 end
 get '/reply' do
 message        = params[:message]
+checkbox       = params[:checkbox].nil? ? false : true
 	erb :reply
 end
 get '/options' do
@@ -99,7 +100,10 @@ puts "----- after redirection #{session[:username]}"
 # end
 end
 post '/reply' do
-  if session[:username]
+session[:checkbox] = @checkbox = params[:checkbox]
+puts @checkbox
+if session[:checkbox] == "true"
+ if session[:username]
   treebase = "dc=hsit, dc=ac, dc=in"
   session[:message] = @message = params[:message]
   ldap = Net::LDAP.new
@@ -109,15 +113,18 @@ post '/reply' do
   dn = "uid=#{session[:username]},ou=people,#{treebase}"
   ops = [
 #  [:add, :deliveryMode, "noforward"],
-  [:replace, :deliveryMode, "reply"],
+   [:replace, :deliveryMode, "reply"],
    [:add, :mailReplyText, "#{@message}"],
-]
+   ]
   puts " from post -- #{session[:message]}"
   ldap.modify :dn => dn, :operations => ops
   erb "<div class='alert alert-message'>Auto Reply Added Successfully</div>"
 else
    redirect '/'
  end
+else
+	erb "<div class='alert alert-message'>checkbox not selected</div>"
+end
 end
 get '/disable' do
 	treebase = "dc=hsit, dc=ac, dc=in"
