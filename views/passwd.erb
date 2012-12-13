@@ -32,6 +32,38 @@
 		padding: 15px 17px;
 	}
 </style>
+ <body style="padding-top: 50px;">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+
+            <a class="brand" href="/">
+              LDAP MANAGER
+            </a>
+        <ul class="nav nav-pills">
+          <li class="dropdown" id="menu1">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+           Auto-reply
+           <b class="caret"></b>
+          </a>
+         <ul class="dropdown-menu">
+           <li><a href="/reply">Enable</a></li>
+           <li><a href="/disable">Disable</a></li>
+         </ul>
+         </li>
+        </ul>
+
+        <ul class="nav">
+              <li><a href="/passwd">Change Password</a></li>
+              <li><a href="/logout">Logout</a></li>
+             </ul>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
 <div class="container">
 <form action='/passwd' method='post' class="container-fluid">
   <input name='newpassword' input type="password" id="password" placeholder="newpassword" autofocus>

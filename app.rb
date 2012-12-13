@@ -120,5 +120,16 @@ else
  end
 end
 get '/disable' do
+	treebase = "dc=hsit, dc=ac, dc=in"
+  	ldap = Net::LDAP.new
+  	ldap.host = "127.0.0.1"
+  	ldap.port = 389
+  	ldap.auth "uid=#{session[:username]},ou=people,#{treebase}", "#{session[:password]}"
+  	dn = "uid=#{session[:username]},ou=people,#{treebase}"
+  	ops = [
+  	[:replace, :deliveryMode, "noforward"],
+   	[:delete, :mailReplyText],
+	]
+	ldap.modify :dn => dn, :operations => ops
 	erb "<div class='alert alert-message'>Auto Reply Removed Succesfully</div>"
 end
