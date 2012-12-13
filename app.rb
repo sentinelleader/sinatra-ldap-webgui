@@ -16,7 +16,7 @@ helpers do
 end
 
 get '/' do
-if session[:username]
+if session[:username] != 'Hello User'
 	redirect '/options'
 else
    erb "Please Login to Continue"
@@ -37,11 +37,13 @@ session[:password] = @password = params[:password]
   ldap.auth "uid=#{@username},ou=people,#{treebase}", "#{@password}"
   if ldap.bind
 # 	" authentication succeeded"
-   puts "#{session[:username]} --- redirecting " 
-    redirect :options
+#   puts "im hereeeeeeee"
+#	  puts "#{session[:username]} --- redirecting " 
+    redirect '/options'
 
   else
-  #	 "authentication failed"
+#  	 "authentication failed"
+   session[:username] = 'Hello User'
      redirect '/'
   end
 end
@@ -118,6 +120,8 @@ if session[:checkbox] == "true"
    ]
   puts " from post -- #{session[:message]}"
   ldap.modify :dn => dn, :operations => ops
+  dn = "uid=#{session[:username]},ou=people,#{treebase}"
+  ldap.delete_attribute dn, :mailForwardingAddress
   erb "<div class='alert alert-message'>Auto Reply Added Successfully</div>"
 else
    redirect '/'
