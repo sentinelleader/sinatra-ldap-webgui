@@ -25,12 +25,15 @@ $epoch_days = d - epoch
 
 
 get '/' do
-	p "user is #{session[:username]}"
-	#if session[:username] != 'Hello User'
-	if session[:username]	
-	redirect '/options'
-	else
+#	p "user is #{session[:username]}"
+	if (session[:username] == "Hello User" || session[:username] == nil) 
+	#if session[:username]	
+        p "#{session[:username]}"
+#	redirect '/options'
+#	else
    	   erb "Please Login to Continue"
+	else
+        redirect '/options'
 	end
 end
 
@@ -50,14 +53,14 @@ post '/login' do
   	  ldap.port = 389
   	  ldap.auth "uid=#{@username},ou=people,#{treebase}", "#{@password}"
   	    if ldap.bind
- 	" authentication succeeded"
-#   puts "im hereeeeeeee"
+ puts	" authentication succeeded"
+   puts "im hereeeeeeee"
 	  puts "#{session[:username]} --- redirecting " 
     	       redirect '/options'
 
   	    else
-#  	 "authentication failed"
-   	       session[:username] = 'Hello User'
+puts  	 "authentication failed"
+   	       session[:username] = "Hello User"
      	       redirect '/'
   	    end
 end
@@ -101,14 +104,17 @@ post '/passwd' do
 			  [:replace, :sambaPwdLastSet, "#{epoch_sec}"],
 			  ]
 			else
+				$max_sec = $epoch_sec + (max1 * 86400) 
+				$max_days = $epoch_days + max1
 			  ops = [
 			  [:replace, :userPassword, "#{@hash_pass}"],
                           [:replace, :shadowLastChange, "#{$epoch_days}"],
-			  [:replace, :shadowExpire, "#{$epoch_days} + max1"],
-                          [:replace, :sambaPwdLastSet, "#{epoch_sec}"],
-			  [:replace, :sambaPwdCanChange, "#{epoch_sec} + (max1 * 86400)"],
-		          [:replace, :sambaPwdMustChange, "#{epoch_sec} + (max1 * 86400)"],
+			  [:replace, :shadowExpire, "#{$max_days}"],
+                          [:replace, :sambaPwdLastSet, "#{$epoch_sec}"],
+			  [:replace, :sambaPwdCanChange, "#{$max_sec}"],
+		          [:replace, :sambaPwdMustChange, "#{$max_sec}"],
                           ]
+			 end
   		ldap.modify :dn => dn, :operations => ops
   		erb "<div class='alert alert-message'>Password Changed Successfully</div>"
 	  else
@@ -124,7 +130,7 @@ end
 
 get '/options' do
   if session[:username] 
-	 puts "from options --- user is #{session[:username]}" 
+	 p #{session[:username]}" 
 #	if session[:username] != 'Hello User'
 	      erb :options
   	else
