@@ -1,0 +1,30 @@
+require 'rubygems'
+require 'net/ldap'
+
+def search(user)
+ treebase = "dc=hsit, dc=ac, dc=in"
+   ldap = Net::LDAP.new
+   ldap.host = "127.0.0.1"
+   ldap.port = 389
+   ldap.auth "uid=admin,ou=people,#{treebase}", "hsit@321"
+ x = Net::LDAP::Filter.eq("shadowMax", "*")
+ y = Net::LDAP::Filter.eq("uid", "#{user}")
+ filter = x & y
+ ldap.search(:base => treebase, :filter => filter, 
+            :return_result => true) do |entry|
+ @pass = entry.shadowMax
+ end
+  return @pass
+
+ end
+username = "test_deep"
+max = search(username)
+puts max.inspect
+max1 = max[0].to_i
+puts max1.inspect
+if max1 == -1
+puts "true"
+else
+puts "false"
+end
+#puts max
